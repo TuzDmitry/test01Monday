@@ -1,26 +1,49 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Display from "./Display";
+import ControlPanel from "./ControlPanel";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+
+class App extends React.Component {
+
+    constructor(props) {
+        super(props);
+    }
+
+    state = {
+        counterNumber: 0,
+        setMaxValue: 5
+    };
+
+
+    resetToZero = () => {
+        let resetCounterNumb = 0;
+        this.setState({counterNumber: resetCounterNumb})
+    }
+
+    incCounter = () => {
+
+        let newNubmer = this.state.counterNumber + 1;
+        if (newNubmer <= this.state.setMaxValue) {
+            this.setState({counterNumber: newNubmer})
+        }
+    }
+
+
+    render = () => {
+
+        return (
+            <div className="container">
+                <div className="counterBlock">
+                    <div className="box">
+                        <Display state={this.state}/>
+                        <ControlPanel state={this.state} incCounter={this.incCounter} resetToZero={this.resetToZero}/>
+                    </div>
+                </div>
+            </div>
+        );
+    }
 }
 
 export default App;
